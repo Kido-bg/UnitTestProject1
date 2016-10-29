@@ -35,7 +35,7 @@ namespace UnitTestProject1
             IWebElement list = driver.FindElement(By.Name("account"));
             SelectElement select = new SelectElement(list);
             select.SelectByText("Savings");
-            driver.FindElement(By.Id("rcptAmount")).SendKeys("500");
+            driver.FindElement(By.Id("rcptAmount")).SendKeys("" + RandomNumber(0 , 1000));
             driver.FindElement(By.Id("transfer_btn")).Click();            
             for (int second = 0; ; second++)
             {
@@ -69,7 +69,7 @@ namespace UnitTestProject1
             driver.FindElement(By.XPath("//a[contains(@href, '/')]")).Click();                      // ne izpulnqva "/"
             
             //Assert.AreEqual("Test software  wisely with AgileWay", driver.Title);
-           // driver.Quit();
+            driver.Quit();
         }
         
 
@@ -98,6 +98,12 @@ namespace UnitTestProject1
             Thread.Sleep(1000);
             Assert.AreEqual("The page you were looking for doesn't exist (404)", driver.Title);
             driver.Quit();
+        }
+
+        public int RandomNumber(int min, int max)
+        {
+            Random x = new Random();
+            return x.Next(min, max);
         }
 
         private bool IsElementPresent(By byX)
